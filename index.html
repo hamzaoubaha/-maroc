@@ -1,0 +1,1709 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PropMarket - Premium Real Estate Marketplace</title>
+    <meta name="description" content="Find your dream property with PropMarket - the leading real estate marketplace with advanced search, verified listings, and expert agents.">
+    <meta name="keywords" content="real estate, property, buy, sell, rent, apartments, houses, commercial">
+    <link rel="canonical" href="https://propmarket.com">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary: #64748b;
+            --accent: #f59e0b;
+            --success: #10b981;
+            --danger: #ef4444;
+            --warning: #f59e0b;
+            --dark: #1e293b;
+            --light: #f8fafc;
+            --border: #e2e8f0;
+            --text: #334155;
+            --text-light: #64748b;
+            --gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background: var(--light);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        /* Header */
+        header {
+            background: white;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-menu a:hover {
+            color: var(--primary);
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .lang-selector {
+            padding: 0.5rem;
+            border: 1px solid var(--border);
+            border-radius: 0.5rem;
+            background: white;
+            cursor: pointer;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            background: transparent;
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: var(--gradient);
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .search-form {
+            background: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: var(--shadow-lg);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .search-tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .search-tab {
+            padding: 0.75rem 1.5rem;
+            border: 2px solid var(--border);
+            background: white;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            color: var(--text);
+        }
+
+        .search-tab.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .search-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr auto;
+            gap: 1rem;
+            align-items: end;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--text);
+        }
+
+        .form-control {
+            padding: 0.75rem;
+            border: 1px solid var(--border);
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        /* Property Cards */
+        .properties {
+            padding: 4rem 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .section-header p {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .property-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .property-card {
+            background: white;
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+
+        .property-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .property-image {
+            position: relative;
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .property-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+
+        .property-card:hover .property-image img {
+            transform: scale(1.05);
+        }
+
+        .property-badge {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background: var(--primary);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        .property-content {
+            padding: 1.5rem;
+        }
+
+        .property-price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .property-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+
+        .property-location {
+            color: var(--text-light);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .property-features {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .property-feature {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        .property-agent {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .agent-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .agent-info {
+            flex: 1;
+        }
+
+        .agent-name {
+            font-weight: 500;
+            color: var(--dark);
+        }
+
+        .agent-title {
+            font-size: 0.875rem;
+            color: var(--text-light);
+        }
+
+        /* Filters */
+        .filters {
+            background: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+        }
+
+        .filter-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .filter-group label {
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--text);
+        }
+
+        .checkbox-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .checkbox-item input[type="checkbox"] {
+            width: 1.25rem;
+            height: 1.25rem;
+            accent-color: var(--primary);
+        }
+
+        /* Dashboard */
+        .dashboard {
+            display: none;
+            padding: 2rem 0;
+        }
+
+        .dashboard.active {
+            display: block;
+        }
+
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .dashboard-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 1rem;
+            box-shadow: var(--shadow);
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            max-width: 500px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-light);
+        }
+
+        /* Pricing */
+        .pricing {
+            padding: 4rem 0;
+            background: var(--light);
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .pricing-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: var(--shadow);
+            text-align: center;
+            position: relative;
+        }
+
+        .pricing-card.featured {
+            border: 3px solid var(--primary);
+            transform: scale(1.05);
+        }
+
+        .pricing-badge {
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--primary);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 1rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        .pricing-price {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .pricing-period {
+            color: var(--text-light);
+            margin-bottom: 2rem;
+        }
+
+        .pricing-features {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .pricing-features li {
+            padding: 0.5rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .pricing-features .fa-check {
+            color: var(--success);
+        }
+
+        .pricing-features .fa-times {
+            color: var(--danger);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 3rem 0 1rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section ul li a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-section ul li a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+
+            .mobile-menu-toggle {
+                display: block;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .search-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .search-tabs {
+                flex-direction: column;
+            }
+
+            .header-actions {
+                gap: 0.5rem;
+            }
+
+            .dashboard-header {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .pricing-card.featured {
+                transform: none;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        /* Map */
+        .map-container {
+            height: 400px;
+            background: var(--border);
+            border-radius: 1rem;
+            margin: 2rem 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-light);
+        }
+
+        /* Messaging */
+        .chat-container {
+            background: white;
+            border-radius: 1rem;
+            box-shadow: var(--shadow);
+            height: 400px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .chat-header {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border);
+            font-weight: 600;
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 1rem;
+            overflow-y: auto;
+        }
+
+        .chat-input {
+            padding: 1rem;
+            border-top: 1px solid var(--border);
+            display: flex;
+            gap: 1rem;
+        }
+
+        .chat-input input {
+            flex: 1;
+            padding: 0.5rem;
+            border: 1px solid var(--border);
+            border-radius: 0.5rem;
+        }
+
+        .message {
+            margin-bottom: 1rem;
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            max-width: 80%;
+        }
+
+        .message.sent {
+            background: var(--primary);
+            color: white;
+            margin-left: auto;
+        }
+
+        .message.received {
+            background: var(--light);
+            color: var(--text);
+        }
+
+        .toast {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--success);
+            color: white;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            box-shadow: var(--shadow);
+            z-index: 3000;
+            transform: translateX(400px);
+            transition: transform 0.3s;
+        }
+
+        .toast.show {
+            transform: translateX(0);
+        }
+
+        .hidden {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="#" class="logo">PropMarket</a>
+                
+                <nav>
+                    <ul class="nav-menu">
+                        <li><a href="#home" onclick="showSection('home')">Home</a></li>
+                        <li><a href="#properties" onclick="showSection('properties')">Properties</a></li>
+                        <li><a href="#agents" onclick="showSection('agents')">Agents</a></li>
+                        <li><a href="#pricing" onclick="showSection('pricing')">Pricing</a></li>
+                        <li><a href="#about" onclick="showSection('about')">About</a></li>
+                    </ul>
+                </nav>
+
+                <div class="header-actions">
+                    <select class="lang-selector" onchange="changeLanguage(this.value)">
+                        <option value="en">🇬🇧 EN</option>
+                        <option value="pt">🇵🇹 PT</option>
+                    </select>
+                    <button class="btn btn-outline" onclick="showModal('loginModal')">
+                        <i class="fas fa-sign-in-alt"></i> Login
+                    </button>
+                    <button class="btn btn-primary" onclick="showModal('registerModal')">
+                        <i class="fas fa-user-plus"></i> Register
+                    </button>
+                    <button class="mobile-menu-toggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Home Section -->
+    <section id="home" class="section active">
+        <div class="hero">
+            <div class="container">
+                <h1 data-en="Find Your Dream Property" data-pt="Encontre a Sua Propriedade dos Sonhos">Find Your Dream Property</h1>
+                <p data-en="Discover the perfect home with our advanced search and verified listings" data-pt="Descubra a casa perfeita com nossa busca avançada e anúncios verificados">Discover the perfect home with our advanced search and verified listings</p>
+                
+                <div class="search-form">
+                    <div class="search-tabs">
+                        <button class="search-tab active" data-type="buy">
+                            <i class="fas fa-home"></i> Buy
+                        </button>
+                        <button class="search-tab" data-type="rent">
+                            <i class="fas fa-key"></i> Rent
+                        </button>
+                        <button class="search-tab" data-type="sell">
+                            <i class="fas fa-tag"></i> Sell
+                        </button>
+                    </div>
+                    
+                    <div class="search-grid">
+                        <div class="form-group">
+                            <label>Location</label>
+                            <input type="text" class="form-control" placeholder="Enter city, neighborhood..." id="searchLocation">
+                        </div>
+                        <div class="form-group">
+                            <label>Property Type</label>
+                            <select class="form-control" id="propertyType">
+                                <option value="">All Types</option>
+                                <option value="apartment">Apartment</option>
+                                <option value="house">House</option>
+                                <option value="condo">Condo</option>
+                                <option value="townhouse">Townhouse</option>
+                                <option value="commercial">Commercial</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Price Range</label>
+                            <select class="form-control" id="priceRange">
+                                <option value="">Any Price</option>
+                                <option value="0-100000">Under €100k</option>
+                                <option value="100000-300000">€100k - €300k</option>
+                                <option value="300000-500000">€300k - €500k</option>
+                                <option value="500000-1000000">€500k - €1M</option>
+                                <option value="1000000+">€1M+</option>
+                            </select>
+                        </div>
+                        <button class="btn btn-primary" onclick="searchProperties()">
+                            <i class="fas fa-search"></i> Search
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="properties">
+            <div class="container">
+                <div class="section-header">
+                    <h2 data-en="Featured Properties" data-pt="Propriedades em Destaque">Featured Properties</h2>
+                    <p data-en="Discover our handpicked selection of premium properties" data-pt="Descubra nossa seleção especial de propriedades premium">Discover our handpicked selection of premium properties</p>
+                </div>
+                
+                <div class="property-grid" id="propertyGrid">
+                    <!-- Properties will be dynamically loaded here -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Properties Section -->
+    <section id="properties" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2>All Properties</h2>
+                <p>Browse our complete collection of verified listings</p>
+            </div>
+            
+            <div class="filters">
+                <div class="filter-grid">
+                    <div class="filter-group">
+                        <label>Bedrooms</label>
+                        <select class="form-control">
+                            <option value="">Any</option>
+                            <option value="1">1+</option>
+                            <option value="2">2+</option>
+                            <option value="3">3+</option>
+                            <option value="4">4+</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>Bathrooms</label>
+                        <select class="form-control">
+                            <option value="">Any</option>
+                            <option value="1">1+</option>
+                            <option value="2">2+</option>
+                            <option value="3">3+</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>Area (m²)</label>
+                        <input type="range" class="form-control" min="30" max="500" value="100">
+                    </div>
+                    <div class="filter-group">
+                        <label>Features</label>
+                        <div class="checkbox-group">
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="parking">
+                                <label for="parking">Parking</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="balcony">
+                                <label for="balcony">Balcony</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="pool">
+                                <label for="pool">Pool</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="property-grid" id="allPropertiesGrid">
+                <!-- All properties will be loaded here -->
+            </div>
+
+            <div class="map-container">
+                <i class="fas fa-map-marked-alt" style="font-size: 3rem; margin-bottom: 1rem;"></i>
+                <p>Interactive Map View - Properties plotted by location</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Agents Section -->
+    <section id="agents" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Our Expert Agents</h2>
+                <p>Connect with experienced real estate professionals</p>
+            </div>
+            
+            <div class="property-grid" id="agentsGrid">
+                <!-- Agents will be loaded here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="section">
+        <div class="pricing">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Choose Your Plan</h2>
+                    <p>Flexible pricing options for agents and property owners</p>
+                </div>
+                
+                <div class="pricing-grid">
+                    <div class="pricing-card">
+                        <h3>Basic</h3>
+                        <div class="pricing-price">€29</div>
+                        <div class="pricing-period">per month</div>
+                        <ul class="pricing-features">
+                            <li><i class="fas fa-check"></i> Up to 5 listings</li>
+                            <li><i class="fas fa-check"></i> Basic analytics</li>
+                            <li><i class="fas fa-check"></i> Email support</li>
+                            <li><i class="fas fa-times"></i> Featured listings</li>
+                            <li><i class="fas fa-times"></i> Premium placement</li>
+                        </ul>
+                        <button class="btn btn-primary">Get Started</button>
+                    </div>
+                    
+                    <div class="pricing-card featured">
+                        <div class="pricing-badge">Most Popular</div>
+                        <h3>Professional</h3>
+                        <div class="pricing-price">€79</div>
+                        <div class="pricing-period">per month</div>
+                        <ul class="pricing-features">
+                            <li><i class="fas fa-check"></i> Up to 25 listings</li>
+                            <li><i class="fas fa-check"></i> Advanced analytics</li>
+                            <li><i class="fas fa-check"></i> Priority support</li>
+                            <li><i class="fas fa-check"></i> Featured listings</li>
+                            <li><i class="fas fa-check"></i> Premium placement</li>
+                        </ul>
+                        <button class="btn btn-primary">Get Started</button>
+                    </div>
+                    
+                    <div class="pricing-card">
+                        <h3>Enterprise</h3>
+                        <div class="pricing-price">€199</div>
+                        <div class="pricing-period">per month</div>
+                        <ul class="pricing-features">
+                            <li><i class="fas fa-check"></i> Unlimited listings</li>
+                            <li><i class="fas fa-check"></i> Advanced analytics</li>
+                            <li><i class="fas fa-check"></i> Dedicated support</li>
+                            <li><i class="fas fa-check"></i> Custom branding</li>
+                            <li><i class="fas fa-check"></i> API access</li>
+                        </ul>
+                        <button class="btn btn-primary">Contact Sales</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2>About PropMarket</h2>
+                <p>Your trusted partner in real estate transactions</p>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 2rem;">
+                <div style="background: white; padding: 2rem; border-radius: 1rem; box-shadow: var(--shadow);">
+                    <i class="fas fa-shield-alt" style="font-size: 2rem; color: var(--primary); margin-bottom: 1rem;"></i>
+                    <h3>Verified Listings</h3>
+                    <p>All properties are thoroughly verified by our team to ensure accuracy and authenticity.</p>
+                </div>
+                <div style="background: white; padding: 2rem; border-radius: 1rem; box-shadow: var(--shadow);">
+                    <i class="fas fa-users" style="font-size: 2rem; color: var(--primary); margin-bottom: 1rem;"></i>
+                    <h3>Expert Agents</h3>
+                    <p>Work with certified real estate professionals who know the local market inside and out.</p>
+                </div>
+                <div style="background: white; padding: 2rem; border-radius: 1rem; box-shadow: var(--shadow);">
+                    <i class="fas fa-chart-line" style="font-size: 2rem; color: var(--primary); margin-bottom: 1rem;"></i>
+                    <h3>Market Insights</h3>
+                    <p>Get access to comprehensive market data and analytics to make informed decisions.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dashboard Section -->
+    <section id="dashboard" class="section">
+        <div class="container">
+            <div class="dashboard" id="userDashboard">
+                <div class="dashboard-header">
+                    <h2>Welcome back, John!</h2>
+                    <button class="btn btn-primary" onclick="showModal('addPropertyModal')">
+                        <i class="fas fa-plus"></i> Add Property
+                    </button>
+                </div>
+                
+                <div class="dashboard-stats">
+                    <div class="stat-card">
+                        <div class="stat-value">12</div>
+                        <div class="stat-label">Active Listings</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">156</div>
+                        <div class="stat-label">Total Views</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">8</div>
+                        <div class="stat-label">Inquiries</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">3</div>
+                        <div class="stat-label">Scheduled Visits</div>
+                    </div>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 2rem;">
+                    <div style="background: white; padding: 2rem; border-radius: 1rem; box-shadow: var(--shadow);">
+                        <h3>My Properties</h3>
+                        <div id="userProperties">
+                            <!-- User's properties will be loaded here -->
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <div class="chat-container">
+                            <div class="chat-header">
+                                <i class="fas fa-comments"></i> Messages
+                            </div>
+                            <div class="chat-messages" id="chatMessages">
+                                <div class="message received">
+                                    <strong>Sarah Johnson:</strong> Hi, I'm interested in your apartment listing. Is it still available?
+                                </div>
+                                <div class="message sent">
+                                    <strong>You:</strong> Yes, it's still available! Would you like to schedule a viewing?
+                                </div>
+                            </div>
+                            <div class="chat-input">
+                                <input type="text" placeholder="Type your message..." id="messageInput">
+                                <button class="btn btn-primary" onclick="sendMessage()">
+                                    <i class="fas fa-paper-plane"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>PropMarket</h3>
+                    <p>Your trusted real estate marketplace connecting buyers, sellers, and agents worldwide.</p>
+                    <div style="margin-top: 1rem;">
+                        <a href="#" style="color: white; margin-right: 1rem;"><i class="fab fa-facebook"></i></a>
+                        <a href="#" style="color: white; margin-right: 1rem;"><i class="fab fa-twitter"></i></a>
+                        <a href="#" style="color: white; margin-right: 1rem;"><i class="fab fa-instagram"></i></a>
+                        <a href="#" style="color: white;"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>For Buyers</h3>
+                    <ul>
+                        <li><a href="#">Browse Properties</a></li>
+                        <li><a href="#">Advanced Search</a></li>
+                        <li><a href="#">Mortgage Calculator</a></li>
+                        <li><a href="#">Buyer's Guide</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>For Sellers</h3>
+                    <ul>
+                        <li><a href="#">List Your Property</a></li>
+                        <li><a href="#">Pricing Tools</a></li>
+                        <li><a href="#">Seller's Guide</a></li>
+                        <li><a href="#">Market Reports</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Support</h3>
+                    <ul>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 PropMarket. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Login Modal -->
+    <div class="modal" id="loginModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Login to Your Account</h3>
+                <button class="close-btn" onclick="closeModal('loginModal')">&times;</button>
+            </div>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="rememberMe">
+                        <label for="rememberMe">Remember me</label>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">
+                    <i class="fas fa-sign-in-alt"></i> Login
+                </button>
+                <div style="text-align: center; margin-top: 1rem;">
+                    <a href="#" style="color: var(--primary);">Forgot password?</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div class="modal" id="registerModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Create Your Account</h3>
+                <button class="close-btn" onclick="closeModal('registerModal')">&times;</button>
+            </div>
+            <form id="registerForm">
+                <div class="form-group">
+                    <label>Account Type</label>
+                    <select class="form-control" required>
+                        <option value="">Select type</option>
+                        <option value="buyer">Buyer</option>
+                        <option value="seller">Seller</option>
+                        <option value="agent">Real Estate Agent</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label>Confirm Password</label>
+                    <input type="password" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="agreeTerms" required>
+                        <label for="agreeTerms">I agree to the Terms of Service</label>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">
+                    <i class="fas fa-user-plus"></i> Create Account
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Add Property Modal -->
+    <div class="modal" id="addPropertyModal">
+        <div class="modal-content" style="max-width: 700px;">
+            <div class="modal-header">
+                <h3 class="modal-title">Add New Property</h3>
+                <button class="close-btn" onclick="closeModal('addPropertyModal')">&times;</button>
+            </div>
+            <form id="addPropertyForm">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                    <div class="form-group">
+                        <label>Property Title</label>
+                        <input type="text" class="form-control" placeholder="e.g., Modern 2BR Apartment" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Property Type</label>
+                        <select class="form-control" required>
+                            <option value="">Select type</option>
+                            <option value="apartment">Apartment</option>
+                            <option value="house">House</option>
+                            <option value="condo">Condo</option>
+                            <option value="townhouse">Townhouse</option>
+                            <option value="commercial">Commercial</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Price (€)</label>
+                        <input type="number" class="form-control" placeholder="250000" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Area (m²)</label>
+                        <input type="number" class="form-control" placeholder="85" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Bedrooms</label>
+                        <select class="form-control" required>
+                            <option value="">Select</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5+">5+</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Bathrooms</label>
+                        <select class="form-control" required>
+                            <option value="">Select</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4+">4+</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Address</label>
+                    <input type="text" class="form-control" placeholder="Street address, city, postal code" required>
+                </div>
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea class="form-control" rows="4" placeholder="Describe your property..." required></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Property Images</label>
+                    <input type="file" class="form-control" multiple accept="image/*">
+                </div>
+                <div class="form-group">
+                    <label>Features</label>
+                    <div class="checkbox-group">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="featParking">
+                            <label for="featParking">Parking</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="featBalcony">
+                            <label for="featBalcony">Balcony</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="featPool">
+                            <label for="featPool">Swimming Pool</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="featGarden">
+                            <label for="featGarden">Garden</label>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">
+                    <i class="fas fa-plus"></i> Add Property
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <span id="toastMessage"></span>
+    </div>
+
+    <script>
+        // Global variables
+        let currentUser = null;
+        let currentLanguage = 'en';
+        let properties = [];
+        let agents = [];
+
+        // Sample data
+        const sampleProperties = [
+            {
+                id: 1,
+                title: 'Modern Downtown Apartment',
+                type: 'apartment',
+                price: 350000,
+                area: 95,
+                bedrooms: 2,
+                bathrooms: 2,
+                location: 'Lisbon, Portugal',
+                image: 'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=400&h=300&fit=crop',
+                features: ['parking', 'balcony'],
+                agent: { name: 'Maria Silva', title: 'Senior Agent', avatar: 'https://images.unsplash.com/photo-1494790108755-2616b93e3838?w=40&h=40&fit=crop&crop=face' },
+                featured: true
+            },
+            {
+                id: 2,
+                title: 'Luxury Villa with Pool',
+                type: 'house',
+                price: 850000,
+                area: 250,
+                bedrooms: 4,
+                bathrooms: 3,
+                location: 'Porto, Portugal',
+                image: 'https://images.unsplash.com/photo-1505843513577-22bb7d21e455?w=400&h=300&fit=crop',
+                features: ['pool', 'garden', 'parking'],
+                agent: { name: 'João Santos', title: 'Property Expert', avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=40&h=40&fit=crop&crop=face' },
+                featured: true
+            },
+            {
+                id: 3,
+                title: 'Cozy Studio Near Beach',
+                type: 'apartment',
+                price: 180000,
+                area: 45,
+                bedrooms: 1,
+                bathrooms: 1,
+                location: 'Cascais, Portugal',
+                image: 'https://images.unsplash.com/photo-1493663284031-b7e3aaa4c4bc?w=400&h=300&fit=crop',
+                features: ['balcony'],
+                agent: { name: 'Ana Costa', title: 'Coastal Specialist', avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=40&h=40&fit=crop&crop=face' },
+                featured: false
+            },
+            {
+                id: 4,
+                title: 'Commercial Space Downtown',
+                type: 'commercial',
+                price: 500000,
+                area: 120,
+                bedrooms: 0,
+                bathrooms: 2,
+                location: 'Lisbon, Portugal',
+                image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=400&h=300&fit=crop',
+                features: ['parking'],
+                agent: { name: 'Pedro Oliveira', title: 'Commercial Expert', avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=40&h=40&fit=crop&crop=face' },
+                featured: false
+            },
+            {
+                id: 5,
+                title: 'Family Townhouse',
+                type: 'townhouse',
+                price: 420000,
+                area: 150,
+                bedrooms: 3,
+                bathrooms: 2,
+                location: 'Braga, Portugal',
+                image: 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=400&h=300&fit=crop',
+                features: ['garden', 'parking'],
+                agent: { name: 'Sofia Ferreira', title: 'Family Homes Expert', avatar: 'https://images.unsplash.com/photo-1494790108755-2616b93e3838?w=40&h=40&fit=crop&crop=face' },
+                featured: true
+            },
+            {
+                id: 6,
+                title: 'Penthouse with City Views',
+                type: 'apartment',
+                price: 750000,
+                area: 180,
+                bedrooms: 3,
+                bathrooms: 3,
+                location: 'Porto, Portugal',
+                image: 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=400&h=300&fit=crop',
+                features: ['balcony', 'parking'],
+                agent: { name: 'Ricardo Mendes', title: 'Luxury Specialist', avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=40&h=40&fit=crop&crop=face' },
+                featured: true
+            }
+        ];
+
+        const sampleAgents = [
+            {
+                id: 1,
+                name: 'Maria Silva',
+                title: 'Senior Real Estate Agent',
+                speciality: 'Residential Properties',
+                experience: '8 years',
+                avatar: 'https://images.unsplash.com/photo-1494790108755-2616b93e3838?w=200&h=200&fit=crop&crop=face',
+                rating: 4.9,
+                sales: 127,
+                phone: '+351 912 345 678',
+                email: 'maria.silva@propmarket.com'
+            },
+            {
+                id: 2,
+                name: 'João Santos',
+                title: 'Luxury Property Expert',
+                speciality: 'High-end Villas',
+                experience: '12 years',
+                avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&h=200&fit=crop&crop=face',
+                rating: 4.8,
+                sales: 89,
+                phone: '+351 913 456 789',
+                email: 'joao.santos@propmarket.com'
+            },
+            {
+                id: 3,
+                name: 'Ana Costa',
+                title: 'Coastal Properties Specialist',
+                speciality: 'Beach & Coastal Homes',
+                experience: '6 years',
+                avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=200&h=200&fit=crop&crop=face',
+                rating: 4.7,
+                sales: 93,
+                phone: '+351 914 567 890',
+                email: 'ana.costa@propmarket.com'
+            },
+            {
+                id: 4,
+                name: 'Pedro Oliveira',
+                title: 'Commercial Real Estate Expert',
+                speciality: 'Commercial Properties',
+                experience: '15 years',
+                avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop&crop=face',
+                rating: 4.9,
+                sales: 156,
+                phone: '+351 915 678 901',
+                email: 'pedro.oliveira@propmarket.com'
+            }
+        ];
+
+        // Initialize the application
+        function init() {
+            properties = [...sampleProperties];
+            agents = [...sampleAgents];
+            loadFeaturedProperties();
+            loadAllProperties();
+            loadAgents();
+            setupEventListeners();
+        }
+
+        // Event listeners
+        function setupEventListeners() {
+            // Search tabs
+            document.querySelectorAll('.search-tab').forEach(tab => {
+                tab.addEventListener('click', function() {
+                    document.querySelectorAll('.search-tab').forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+
+            // Forms
+            document.getElementById('loginForm').addEventListener('submit', handleLogin);
+            document.getElementById('registerForm').addEventListener('submit', handleRegister);
+            document.getElementById('addPropertyForm').addEventListener('submit', handleAddProperty);
+
+            // Close modals on outside click
+            document.querySelectorAll('.modal').forEach(modal => {
+                modal.addEventListener('click', function(e) {
+                    if (e.target === this) {
+                        this.classList.remove('active');
+                    }
+                });
+            });
+        }
+
+        // Navigation
+        function showSection(sectionId) {
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.remove('active');
+            });
+            document.getElementById(sectionId).classList.add('active');
+        }
+
+        // Modal management
+        function showModal(modalId) {
+            document.getElementById(modalId).classList.add('active');
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
+        }
+
+        // Property loading
+        function loadFeaturedProperties() {
+            const featuredProperties = properties.filter(p => p.featured);
+            const grid = document.getElementById('propertyGrid');
+            grid.innerHTML = featuredProperties.map(property => createPropertyCard(property)).join('');
+        }
+
+        function loadAllProperties() {
+            const grid = document.getElementById('allPropertiesGrid');
+            grid.innerHTML = properties.map(property => createPropertyCard(property)).join('');
+        }
+
+        function createPropertyCard(property) {
+            const formatter = new Intl.NumberFormat('en-US', {
+                style: 'currency',
+                currency: 'EUR',
+                minimumFractionDigits: 0
+            });
+
+            return `
+                <div class="property-card" onclick="showPropertyDetails(${property.id})">
+                    <div class="property-image">
+                        <img src="${property.image}" alt="${property.title}">
+                        <div class="property-badge">${property.type}</div>
+                    </div>
+                    <div class="property-content">
+                        <div class="property-price">${formatter.format(property.price)}</div>
+                        <div class="property-title">${property.title}</div>
+                        <div class="property-location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            ${property.location}
+                        </div>
+                        <div class="property-features">
+                            <div class="property-feature">
+                                <i class="fas fa-bed"></i>
+                                ${property.bedrooms} bed${property.bedrooms !== 1 ? 's' : ''}
+                            </div>
+                            <div class="property-feature">
+                                <i class="fas fa-bath"></i>
+                                ${property.bathrooms} bath${property.bathrooms !== 1 ? 's' : ''}
+                            </div>
+                            <div class="property-feature">
+                                <i class="fas fa-ruler-combined"></i>
+                                ${property.area}m²
+                            </div>
+                        </div>
+                        <div class="property-agent">
+                            <img src="${property.agent.avatar}" alt="${property.agent.name}" class="agent-avatar">
+                            <div class="agent-info">
+                                <div class="agent-name">${property.agent.name}</div>
+                                <div class="agent-title">${property.agent.title}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function showPropertyDetails(propertyId) {
+            const property = properties.find(p => p.id === propertyId);
+            if (property) {
+                showToast(`Viewing details for: ${property.title}`);
+                // Here you would show a detailed property modal or navigate to a property page
+            }
+        }
+
+        // Agent loading
+        function loadAgents() {
+            const grid = document.getElementById('agentsGrid');
+            grid.innerHTML = agents.map(agent => createAgentCard(agent)).join('');
+        }
+
+        function createAgentCard(agent) {
+            return `
+                <div class="property-card" onclick="contactAgent(${agent.id})">
+                    <div class="property-image">
+                        <img src="${agent.avatar}" alt="${agent.name}">
+                    </div>
+                    <div class="property-content">
+                        <div class="property-title">${agent.name}</div>
+                        <div class="property-location">
+                            <i class="fas fa-briefcase"></i>
+                            ${agent.title}
+                        </div>
+                        <div class="property-features">
+                            <div class="property-feature">
+                                <i class="fas fa-star"></i>
+                                ${agent.rating} rating
+                            </div>
+                            <div class="property-feature">
+                                <i class="fas fa-handshake"></i>
+                                ${agent.sales} sales
+                            </div>
+                            <div class="property-feature">
+                                <i class="fas fa-clock"></i>
+                                ${agent.experience}
+                            </div>
+                        </div>
+                        <div style="margin-top: 1rem;">
+                            <div style="font-weight: 500; margin-bottom: 0.5rem;">Speciality:</div>
+                            <div style="color: var(--text-light);">${agent.speciality}</div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function contactAgent(agentId) {
+            const agent = agents.find(a => a.id === agentId);
+            if (agent) {
+                showToast(`Contacting ${agent.name}...`);
+                // Here you would open a contact form or messaging interface
+            }
+        }
+
+        // Search functionality
+        function searchProperties() {
+            const location = document.getElementById('searchLocation').value;
+            const propertyType = document.getElementById('propertyType').value;
+            const priceRange = document.getElementById('priceRange').value;
+
+            let filteredProperties = properties;
+
+            if (location) {
+                filteredProperties = filteredProperties.filter(p => 
+                    p.location.toLowerCase().includes(location.toLowerCase())
+                );
+            }
+
+            if (propertyType) {
+                filteredProperties = filteredProperties.filter(p => p.type === propertyType);
+            }
+
+            if (priceRange) {
+                const [min, max] = priceRange.split('-').map(p => parseInt(p.replace('+', '')));
+                filteredProperties = filteredProperties.filter(p => {
+                    if (priceRange.includes('+')) {
+                        return p.price >= min;
+                    } else {
+                        return p.price >= min && p.price <= max;
+                    }
+                });
+            }
+
+            showSection('properties');
+            const grid = document.getElementById('allPropertiesGrid');
+            grid.innerHTML = filteredProperties.map(property => createPropertyCard(property)).join('');
+            
+            showToast(`Found ${filteredProperties.length} properties matching your criteria`);
+        }
+
+        // Form handlers
+        function handleLogin(e) {
+            e.preventDefault();
+            // Simulate login
+            currentUser = {
+                id: 1,
+                name: 'John Doe',
+                email: 'john@example.com',
+                type: 'seller'
+            };
+            closeModal('loginModal');
+            updateUIForLoggedInUser();
+            showToast('Successfully logged in!');
+        }
+
+        function handleRegister(e) {
+            e.preventDefault();
+            // Simulate registration
+            closeModal('registerModal');
+            showToast('Account created successfully! Please log in.');
+            setTimeout(() => showModal('loginModal'), 1000);
+        }
+
+        function handleAddProperty(e) {
+            e.preventDefault();
+            // Simulate adding property
+            closeModal('addPropertyModal');
+            showToast('Property added successfully!');
+            // Here you would add the property to the database
+        }
+
+        // function updateUIForLoggedInUser() {
+        //     // Update header buttons
+        //     const headerActions = document.querySelector('.header-actions');
+        //     headerActions.innerHTML = `
+        </script>
+    </body>
+</html>
